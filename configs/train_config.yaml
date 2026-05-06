@@ -1,0 +1,39 @@
+model:
+  name: Qwen/Qwen2.5-Coder-7B-Instruct
+  quantization: 4bit
+  max_seq_length: 2048
+
+lora:
+  rank: 64
+  alpha: 128
+  dropout: 0.05
+  target_modules:
+    - q_proj
+    - k_proj
+    - v_proj
+    - o_proj
+    - gate_proj
+    - up_proj
+    - down_proj
+
+training:
+  num_epochs: 3
+  per_device_batch_size: 1
+  gradient_accumulation_steps: 16
+  learning_rate: 2.0e-4
+  warmup_ratio: 0.05
+  weight_decay: 0.01
+  lr_scheduler_type: cosine
+  gradient_checkpointing: true
+  logging_steps: 10
+  save_steps: 200
+  eval_steps: 200
+  save_total_limit: 3
+  bf16: true
+  output_dir: outputs/text2sql-qlora
+  report_to: wandb
+
+data:
+  train_file: data/train.jsonl
+  eval_file: data/eval.jsonl
+  max_samples: null
