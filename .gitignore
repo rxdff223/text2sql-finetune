@@ -1,33 +1,24 @@
+# Data files (large)
+data/cspider/
+data/cspider_data/
+data/spider_test/
+data/bird/
+full_CSpider/
+pretrained_models/
+
+# Training outputs & checkpoints
+outputs/
+checkpoints/
+
 # Python
 __pycache__/
-*.py[cod]
+*.pyc
 *.egg-info/
-dist/
-build/
-
-# Data files (too large for git)
-data/spider/
-data/bird/
-data/cspider/
-data/train.jsonl
-data/eval.jsonl
-data/train_augmented.jsonl
-
-# Model outputs
-outputs/
+.eggs/
 
 # IDE
 .vscode/
 .idea/
 
-# OS
-.DS_Store
-Thumbs.db
-
-# Environment
-.env
-venv/
-.venv/
-
-# Wandb
-wandb/
+# Logs
+*.log

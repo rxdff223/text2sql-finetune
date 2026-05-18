@@ -57,10 +57,10 @@ def load_spider(data_dir: Path, split: str) -> list[dict]:
         print(f"[Spider] {data_file} not found, skipping.")
         return []
 
-    with open(tables_file) as f:
+    with open(tables_file, encoding="utf-8") as f:
         db_schemas = build_schema_from_tables(json.load(f))
 
-    with open(data_file) as f:
+    with open(data_file, encoding="utf-8") as f:
         raw = json.load(f)
 
     samples = []
@@ -81,25 +81,35 @@ def load_spider(data_dir: Path, split: str) -> list[dict]:
 def load_bird(data_dir: Path, split: str) -> list[dict]:
     """加载 BIRD 数据集"""
     bird_dir = data_dir / "bird"
-    data_file = bird_dir / split / f"{split}.json"
+
+    if split == "train":
+        data_file = bird_dir / "train" / "train.json"
+        tables_file = bird_dir / "train" / "train_tables.json"
+    else:
+        data_file = bird_dir / "dev_20240627" / "dev.json"
+        tables_file = bird_dir / "dev_20240627" / "dev_tables.json"
 
     if not data_file.exists():
         print(f"[BIRD] {data_file} not found, skipping.")
         return []
 
-    with open(data_file) as f:
+    with open(tables_file, encoding="utf-8") as f:
+        db_schemas = build_schema_from_tables(json.load(f))
+
+    with open(data_file, encoding="utf-8") as f:
         raw = json.load(f)
 
     samples = []
     for item in raw:
-        schema = item.get("create_table", "")
+        db_id = item.get("db_id", "")
+        schema = db_schemas.get(db_id, "")
         if not schema:
-            schema = f"-- Database: {item.get('db_id', 'unknown')}"
+            schema = f"-- Database: {db_id}"
         samples.append({
             "question": item["question"],
             "sql": item["SQL"],
             "schema": schema,
-            "db_id": item.get("db_id", ""),
+            "db_id": db_id,
             "source": "bird",
             "lang": "en",
         })
@@ -118,10 +128,10 @@ def load_cspider(data_dir: Path, split: str) -> list[dict]:
         print(f"[CSpider] {data_file} not found, skipping.")
         return []
 
-    with open(tables_file) as f:
+    with open(tables_file, encoding="utf-8") as f:
         db_schemas = build_schema_from_tables(json.load(f))
 
-    with open(data_file) as f:
+    with open(data_file, encoding="utf-8") as f:
         raw = json.load(f)
 
     samples = []

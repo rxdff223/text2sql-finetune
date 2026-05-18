@@ -1,39 +1,37 @@
 model:
-  name: Qwen/Qwen2.5-Coder-7B-Instruct
+  name: D:/text2sql-finetune/pretrained_models/Qwen2.5-Coder-7B-Instruct
   quantization: 4bit
   max_seq_length: 2048
 
 lora:
-  rank: 64
-  alpha: 128
-  dropout: 0.05
+  rank: 16
+  alpha: 32
+  dropout: 0.15
   target_modules:
     - q_proj
     - k_proj
     - v_proj
     - o_proj
-    - gate_proj
-    - up_proj
-    - down_proj
 
 training:
-  num_epochs: 3
-  per_device_batch_size: 1
-  gradient_accumulation_steps: 16
-  learning_rate: 2.0e-4
-  warmup_ratio: 0.05
-  weight_decay: 0.01
+  num_epochs: 1
+  per_device_batch_size: 2
+  gradient_accumulation_steps: 8
+  learning_rate: 5.0e-5
+  warmup_ratio: 0.15
+  weight_decay: 0.1
   lr_scheduler_type: cosine
   gradient_checkpointing: true
   logging_steps: 10
-  save_steps: 200
-  eval_steps: 200
-  save_total_limit: 3
+  save_steps: 50
+  eval_steps: 50
+  save_total_limit: 10
   bf16: true
-  output_dir: outputs/text2sql-qlora
-  report_to: wandb
+  output_dir: D:/text2sql-finetune/outputs/text2sql-qlora-v3
+  report_to: none
+  early_stopping_patience: 5
 
 data:
-  train_file: data/train.jsonl
-  eval_file: data/eval.jsonl
+  train_file: D:/text2sql-finetune/data/train_augmented.jsonl
+  eval_file: D:/text2sql-finetune/data/eval.jsonl
   max_samples: null
