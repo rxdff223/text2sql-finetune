@@ -1,0 +1,75 @@
+{
+  "metrics": {
+    "total": 0,
+    "exact_match": 455,
+    "execution_accuracy": 772,
+    "em_total": 1034,
+    "ex_total": 1034,
+    "by_difficulty": {
+      "easy": {
+        "em": 290,
+        "ex": 364,
+        "total": 428
+      },
+      "medium": {
+        "em": 135,
+        "ex": 311,
+        "total": 450
+      },
+      "hard": {
+        "em": 30,
+        "ex": 97,
+        "total": 146
+      },
+      "extra_hard": {
+        "em": 0,
+        "ex": 0,
+        "total": 10
+      }
+    },
+    "reason_breakdown": {
+      "exact_match": 772,
+      "result_mismatch": 216,
+      "pred_failed": 46
+    },
+    "db_not_found": 0
+  },
+  "pred_failed_detail": {
+    "no such column: T3.pet_type": 3,
+    "no such column: T2.pet_type": 1,
+    "no such column: pet_type": 2,
+    "no such column: t2.pettype": 2,
+    "no such column: T1.ContId": 1,
+    "no such column: T2.id": 3,
+    "no such column: T2.Year": 1,
+    "no such column: T2.FullName": 1,
+    "no such column: T2.Weight": 3,
+    "no such column: T2.Horsepower": 1,
+    "no such column: T1.Weight": 1,
+    "no such column: Weight": 1,
+    "no such column: T1.id": 3,
+    "no such column: T2.manager_name": 1,
+    "Could not decode to UTF-8 column 'last_name' with ": 2,
+    "no such column: T1.rank_points": 3,
+    "no such column: T1.rank": 2,
+    "no such column: T1.battle_id": 1,
+    "no such table: degrees_programs": 2,
+    "no such column: T2.date_left": 1,
+    "no such column: T1.episode": 1,
+    "no such column: T1.CountryCode": 2,
+    "no such column: T2.GovernmentForm": 1,
+    "no such column: T3.Language": 1,
+    "no such column: T2.Percentage": 1,
+    "no such column: YEAR_OF_FOUNDEN": 1,
+    "no such column: YEAR_OF_FOUNDATED": 1,
+    "misuse of aggregate function count()": 1,
+    "no such column: T3.charge_id": 1,
+    "no such table: treats": 1
+  },
+  "summary": {
+    "em": "44.0%",
+    "ex": "74.7%",
+    "total": 1034,
+    "db_not_found": 0
+  }
+}
